@@ -1,0 +1,33 @@
+version: "3.0"
+
+services:
+ wordpress:
+  image: wordpress
+  restart: unless-stopped
+  ports:
+   - "8080:80"
+  volumes:
+   - miword:/var/lib/html
+
+  environment:
+   WORDPRESS_DB_HOST: db
+   WORDPRESS_DB_USER: wordpress
+   WORDPRESS_DB_NAME: miBBDD
+   WORDPRESS_DB_PASSWORD: 12345
+
+ db:
+  image: mariadb
+  restart: unless-stopped
+  volumes:
+   - mariadb:/var/lib/mysql
+
+  environment: 
+   MYSQL_ROOT_PASSWORD: 1234
+   MYSQL_DATABASE: miBBDD
+   MYSQL_USER: wordpress
+   MYSQL_PASSWORD: 12345
+
+
+volumes:
+ mariadb:
+ miword:
