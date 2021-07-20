@@ -11,9 +11,9 @@ services:
 
   environment:
    WORDPRESS_DB_HOST: db
-   WORDPRESS_DB_USER: wordpress
+   WORDPRESS_DB_USER: ${USER_NAME:-wordpress}
    WORDPRESS_DB_NAME: miBBDD
-   WORDPRESS_DB_PASSWORD: 12345
+   WORDPRESS_DB_PASSWORD: ${WORDPRESS_PASS?Has de introducir una clave para mariadb}
 
  db:
   image: mariadb:10.6.3-focal
@@ -22,10 +22,10 @@ services:
    - mariadb:/var/lib/mysql
 
   environment: 
-   MYSQL_ROOT_PASSWORD: 1234
+   MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
    MYSQL_DATABASE: miBBDD
-   MYSQL_USER: wordpress
-   MYSQL_PASSWORD: 12345
+   MYSQL_USER: ${USER_NAME:-wordpress}
+   MYSQL_PASSWORD: ${MYSQL_PASS}
 
  phpmyadmin:
   image: phpmyadmin:5.1.1-apache
